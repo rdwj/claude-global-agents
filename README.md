@@ -1,43 +1,93 @@
-## AI Agents for Claude Code
+# Specialized AI Subagents for Claude Code
 
-A curated collection of role definition documents for specialized AI assistants ("agents"). Each file in `agents/` describes a focused persona with clear responsibilities and constraints to accelerate high‑quality work across architecture, security, GitOps, testing, documentation, and more.
+This directory contains specialized AI subagents for Claude Code. Each subagent is focused on a specific domain with dedicated tools and expertise.
 
-### Use with Claude Code
+**For complete documentation, installation instructions, and workflow information, see the [main README](../README.md).**
 
-These agents are designed to be used with Claude Code. To make them available in Claude Code, copy the Markdown files from this repository into your local Claude agents directory.
+## Available Subagents
 
-#### Quick start
+### Architecture & Design
+- `solution-architect.md` - High-level architectural decisions and technology stack recommendations
+- `proposal-writer.md` - Create comprehensive technical proposals
+- `architecture-reviewer.md` - Validate proposals against project architecture
+- `microservices-architect.md` - Microservices patterns and distributed systems
+
+### Security
+- `security-compliance-scanner.md` - Security vulnerability analysis and FIPS compliance
+- `security-reviewer.md` - Security review of proposals and implementations
+
+### Development & Implementation
+- `story-scaffolder.md` - Create code structure and stubs from user stories
+- `scaffold-filler.md` - Implement logic in scaffolded code
+- `senior-code-reviewer.md` - Comprehensive code review for quality and compliance
+- `claude-worker.md` - General-purpose worker for delegated tasks
+- `codebase-master.md` - Prevent duplicate implementations, maintain code awareness
+
+### Testing & Quality
+- `test-execution-analyst.md` - Design and analyze testing strategies
+
+### Documentation
+- `documentation-architect.md` - Create and improve technical documentation
+
+### Deployment & Operations
+- `openshift-deployment-engineer.md` - OpenShift deployment manifests and GitOps
+- `gitops-argocd-specialist.md` - ArgoCD configuration and GitOps workflows
+
+### Technology-Specific
+- `react-nextjs-architect.md` - React and Next.js application development
+- `react-native-ux-designer.md` - React Native mobile UI/UX design
+- `streamlit-app-developer.md` - Streamlit data applications
+- `langgraph-adversarial-architect.md` - LangGraph workflows with validation
+- `mcp-protocol-expert.md` - Model Context Protocol server development
+- `neo4j-graphrag-architect.md` - Graph database schemas for RAG systems
+- `llama-prompt-engineer.md` - Prompt optimization for Meta Llama models
+- `granite-prompt-engineer.md` - Prompt optimization for IBM Granite models
+
+### Specialized Tools
+- `dependency-analyzer-python.md` - Python dependency analysis and security audits
+
+## Quick Start
 
 ```bash
-mkdir -p ~/.claude/agents
+# Install all subagents (user-level)
 cp -R agents/* ~/.claude/agents/
+
+# Or install for specific project
+cp -R agents/* .claude/agents/
 ```
 
-- Open Claude Code and choose from your available agents. The copied files will appear by their filenames.
-- To update an agent, edit the file in this repo and re‑copy it to `~/.claude/agents/`.
+## Usage
 
-#### Sync script (optional)
+Subagents are invoked automatically by Claude Code when needed, or you can request them explicitly:
 
-Use the helper script to sync all agent files automatically. It detects whether the files are at the repo root or inside an `agents/` subdirectory and excludes non‑agent files.
-
-```bash
-./sync-agents.sh              # sync to ~/.claude/agents
-./sync-agents.sh /custom/dir  # sync to a custom destination
+```
+"Use the codebase-master subagent to check if we already have this functionality"
+"Ask the security-compliance-scanner to review this for FIPS compliance"
 ```
 
-### Contents
+## Creating Custom Subagents
 
-- `agents/`: Individual agent role specifications as Markdown files (one per specialty)
-  - Examples: dependency analysis, GitOps/ArgoCD, security/compliance, LangGraph, React/Next.js, OpenShift deployment, and others
+Use the `/agents` command in Claude Code for interactive subagent creation, or manually create a Markdown file with YAML frontmatter:
 
-### Contributing
+```markdown
+---
+name: my-custom-agent
+description: Brief description of what this agent does
+tools:
+  - Read
+  - Write
+  - Bash
+---
 
-Contributions are welcome:
-- Keep files concise and focused; prefer clarity over breadth.
-- Use consistent headings and imperative, action‑oriented guidance.
-- Avoid duplication across agents; factor shared guidance into a single agent when possible.
-- Submit PRs with a short rationale for the changes.
+# Agent system prompt
 
-### License
+Your specialized instructions here...
+```
 
-This project is licensed under the MIT License. See `LICENSE` for details.
+## Contributing
+
+See the [main README](../README.md#contributing) for contribution guidelines.
+
+## License
+
+MIT License - See [LICENSE](../LICENSE) for details.
